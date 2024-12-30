@@ -1,5 +1,6 @@
 import { useForm } from '@inertiajs/react'
 import { FormEvent } from 'react'
+import { toast } from 'sonner'
 import { cn } from '~/components/lib/utils'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
@@ -40,9 +41,18 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
         <div className="grid gap-2">
           <div className="flex items-center">
             <Label htmlFor="password">Password</Label>
-            <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+            <Button
+              variant="ghost"
+              className="ml-auto text-sm underline-offset-4 hover:underline"
+              onClick={() =>
+                toast.info('Forgot your password?', {
+                  description: 'Please contact your administrator.',
+                  closeButton: true,
+                })
+              }
+            >
               Forgot your password?
-            </a>
+            </Button>
           </div>
           <Input
             id="password"
