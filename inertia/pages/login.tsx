@@ -1,35 +1,38 @@
 import { Head, useForm } from '@inertiajs/react'
+import { GalleryVerticalEnd } from 'lucide-react'
 import { FormEvent } from 'react'
+import { LoginForm } from '~/components/login-form'
+import { Toaster, toast } from 'sonner'
 
 export default function Home() {
-  const { data, setData, post, processing, errors } = useForm({
-    email: '',
-    password: '',
-    remember: false,
-  })
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault()
-    post('/login')
-  }
-
   return (
     <>
       <Head title="Login" />
-      <h1>Login</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="email" onChange={(e) => setData('email', e.target.value)} />
-
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setData('password', e.target.value)}
-        />
-
-        <button type="submit">Login</button>
-      </form>
+      <div className="grid min-h-svh lg:grid-cols-2">
+        <div className="flex flex-col gap-4 p-6 md:p-10">
+          <div className="flex justify-center gap-2 md:justify-start">
+            <Toaster />
+            <a className="flex items-center gap-2 font-medium">
+              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                <GalleryVerticalEnd className="size-4" />
+              </div>
+              EHPAD
+            </a>
+          </div>
+          <div className="flex flex-1 items-center justify-center">
+            <div className="w-full max-w-xs">
+              <LoginForm />
+            </div>
+          </div>
+        </div>
+        <div className="relative hidden bg-muted lg:block">
+          <img
+            src="/placeholder.svg"
+            alt="Image"
+            className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          />
+        </div>
+      </div>
     </>
   )
 }
